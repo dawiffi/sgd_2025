@@ -211,6 +211,11 @@ def changeBackgroundAnimation(animationSpeed=40):
 
 def gameOverAnimation(color=WHITE, animationSpeed=50):
     # play all beeps at once, then flash the background
+
+    #display a game over message
+    gameOverSurf = BASICFONT.render('Game Over!', 1, BLACK)
+    gameOverRect = gameOverSurf.get_rect()
+    gameOverRect.center = (WINDOWWIDTH/2, WINDOWHEIGHT/2)
     origSurf = DISPLAYSURF.copy()
     flashSurf = pygame.Surface(DISPLAYSURF.get_size())
     flashSurf = flashSurf.convert_alpha()
@@ -229,9 +234,11 @@ def gameOverAnimation(color=WHITE, animationSpeed=50):
                 flashSurf.fill((r, g, b, alpha))
                 DISPLAYSURF.blit(origSurf, (0, 0))
                 DISPLAYSURF.blit(flashSurf, (0, 0))
+                DISPLAYSURF.blit(gameOverSurf, gameOverRect)
                 drawButtons()
                 pygame.display.update()
                 FPSCLOCK.tick(FPS)
+    # display a game over message
 
 
 
