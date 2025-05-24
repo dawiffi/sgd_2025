@@ -699,6 +699,11 @@ def drawStatus(score, level):
     scoreRect.topleft = (WINDOWWIDTH - 150, 20)
     DISPLAYSURF.blit(scoreSurf, scoreRect)
 
+    scoreSurf = BASICFONT.render('Lines cleared: %s' % score, True, TEXTCOLOR)
+    scoreRect = scoreSurf.get_rect()
+    scoreRect.topleft = (WINDOWWIDTH - 150, 35)
+    DISPLAYSURF.blit(scoreSurf, scoreRect)
+
     # draw the level text
     levelSurf = BASICFONT.render('Level: %s' % level, True, TEXTCOLOR)
     levelRect = levelSurf.get_rect()

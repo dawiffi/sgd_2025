@@ -21,6 +21,9 @@ Add a feature to display the number of moves the player has made during the game
 
 · pentomino.py:
 Add a feature to display the number of lines cleared during the game in the top-right corner of the screen.
+  
+  
+![](pentomino.gif)
 
 · flippy.py
 Add sound effects for placing tiles, flipping tiles, and winning/losing the game.
