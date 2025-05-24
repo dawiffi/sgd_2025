@@ -3,6 +3,7 @@ Wybrane gry:
 
 · catanimation.py:
 Extend the game by adding second cat with different directions. Each cat should move independently and bounce off the edges of the screen
+![](catanimation.gif)
 
 · simulate.py:
 Add a feature to display a "Game Over" message when the player loses.
