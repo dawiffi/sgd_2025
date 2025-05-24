@@ -35,3 +35,6 @@ https://github.com/user-attachments/assets/562a6779-2833-44ab-9463-7493b97d59b6
 
 · inkspill.py:
 Add a feature to display the number of moves the player has made during the game in the top-left corner of the screen.
+  
+
+![](inkspill.gif)
