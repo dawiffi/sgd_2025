@@ -60,11 +60,13 @@ bgColor = COLORSCHEMES[0][0]
 paletteColors =  COLORSCHEMES[0][1:]
 
 def main():
-    global FPSCLOCK, DISPLAYSURF, LOGOIMAGE, SPOTIMAGE, SETTINGSIMAGE, SETTINGSBUTTONIMAGE, RESETBUTTONIMAGE
+    global FPSCLOCK, DISPLAYSURF, LOGOIMAGE, SPOTIMAGE, SETTINGSIMAGE, SETTINGSBUTTONIMAGE, RESETBUTTONIMAGE, fontObj
 
     pygame.init()
     FPSCLOCK = pygame.time.Clock()
     DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
+    pygame.font.init()
+    fontObj = pygame.font.SysFont(None, 36)
 
     # Load images
     LOGOIMAGE = pygame.image.load('inkspilllogo.png')
@@ -89,6 +91,7 @@ def main():
         drawLogoAndButtons()
         drawBoard(mainBoard)
         drawLifeMeter(life)
+        drawMovesMade(life)
         drawPalettes()
 
         checkForQuit()
@@ -379,6 +382,11 @@ def drawPalettes():
         pygame.draw.rect(DISPLAYSURF, paletteColors[i], (left, top, PALETTESIZE, PALETTESIZE))
         pygame.draw.rect(DISPLAYSURF, bgColor,   (left + 2, top + 2, PALETTESIZE - 4, PALETTESIZE - 4), 2)
 
+def drawMovesMade(currentLife):
+    textSurfaceObj = fontObj.render('Moves made: %s' % (maxLife-currentLife), True, WHITE)
+    textRectObj = textSurfaceObj.get_rect()
+    textRectObj.topleft = (WINDOWWIDTH - 490, 25)
+    DISPLAYSURF.blit(textSurfaceObj, textRectObj)
 
 def drawLifeMeter(currentLife):
     lifeBoxSize = int((WINDOWHEIGHT - 40) / maxLife)
