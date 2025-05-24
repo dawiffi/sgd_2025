@@ -64,7 +64,7 @@ def main():
         if mainBoard == SOLVEDBOARD:
             msg = 'Solved!'
 
-        drawBoard(mainBoard, msg)
+        drawBoard(mainBoard, msg, len(allMoves))
 
         checkForQuit()
         for event in pygame.event.get(): # event handling loop
@@ -230,11 +230,15 @@ def makeText(text, color, bgcolor, top, left):
     return (textSurf, textRect)
 
 
-def drawBoard(board, message):
+def drawBoard(board, message, numMoves=0):
     DISPLAYSURF.fill(BGCOLOR)
     if message:
         textSurf, textRect = makeText(message, MESSAGECOLOR, BGCOLOR, 5, 5)
         DISPLAYSURF.blit(textSurf, textRect)
+
+    if numMoves > 0:
+        movesSurf, movesRect = makeText(f'Moves: {numMoves}', TEXTCOLOR, BGCOLOR, 5, 30)
+        DISPLAYSURF.blit(movesSurf, movesRect)
 
     for tilex in range(len(board)):
         for tiley in range(len(board[0])):
@@ -251,7 +255,7 @@ def drawBoard(board, message):
     DISPLAYSURF.blit(SOLVE_SURF, SOLVE_RECT)
 
 
-def slideAnimation(board, direction, message, animationSpeed):
+def slideAnimation(board, direction, message, animationSpeed, numMoves=0):
     # Note: This function does not check if the move is valid.
 
     blankx, blanky = getBlankPosition(board)
@@ -269,7 +273,7 @@ def slideAnimation(board, direction, message, animationSpeed):
         movey = blanky
 
     # prepare the base surface
-    drawBoard(board, message)
+    drawBoard(board, message, numMoves)
     baseSurf = DISPLAYSURF.copy()
     # draw a blank space over the moving tile on the baseSurf Surface.
     moveLeft, moveTop = getLeftTopOfTile(movex, movey)

@@ -15,6 +15,9 @@ Add a feature to display a "Game Over" message when the player loses.
 
 · slidepuzzle.py:
 Add a feature to display the number of moves the player has made during the game in the top-left corner of the screen.
+  
+  
+![](slidepuzzle.gif)
 
 · pentomino.py:
 Add a feature to display the number of lines cleared during the game in the top-right corner of the screen.
