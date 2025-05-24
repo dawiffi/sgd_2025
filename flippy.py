@@ -43,8 +43,14 @@ HINTCOLOR = BROWN
 
 def main():
     global MAINCLOCK, DISPLAYSURF, FONT, BIGFONT, BGIMAGE
+    global PLACE_SOUND, FLIP_SOUND, WIN_SOUND, LOSE_SOUND
 
     pygame.init()
+    pygame.mixer.init()
+    PLACE_SOUND = pygame.mixer.Sound('flippy_place.wav')
+    FLIP_SOUND = pygame.mixer.Sound('flippy_flip.wav')
+    WIN_SOUND = pygame.mixer.Sound('flippy_win.wav')
+    LOSE_SOUND = pygame.mixer.Sound('flippy_lose.wav')
     MAINCLOCK = pygame.time.Clock()
     DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
     pygame.display.set_caption('Flippy')
@@ -175,9 +181,11 @@ def runGame():
     if scores[playerTile] > scores[computerTile]:
         text = 'You beat the computer by %s points! Congratulations!' % \
                (scores[playerTile] - scores[computerTile])
+        WIN_SOUND.play()
     elif scores[playerTile] < scores[computerTile]:
         text = 'You lost. The computer beat you by %s points.' % \
                (scores[computerTile] - scores[playerTile])
+        LOSE_SOUND.play()
     else:
         text = 'The game was a tie!'
 
@@ -246,6 +254,7 @@ def animateTileChange(tilesToFlip, tileColor, additionalTile):
             color = tuple([255 - rgbValues] * 3) # rgbValues goes from 255 to 0
 
         for x, y in tilesToFlip:
+            FLIP_SOUND.play()
             centerx, centery = translateBoardToPixelCoord(x, y)
             pygame.draw.circle(DISPLAYSURF, color, (centerx, centery), int(SPACESIZE / 2) - 4)
         pygame.display.update()
@@ -467,6 +476,7 @@ def makeMove(board, tile, xstart, ystart, realMove=False):
     board[xstart][ystart] = tile
 
     if realMove:
+        PLACE_SOUND.play()
         animateTileChange(tilesToFlip, tile, (xstart, ystart))
 
     for x, y in tilesToFlip:
